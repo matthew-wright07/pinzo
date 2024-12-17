@@ -14,7 +14,7 @@ export default function AboutAbout() {
         <h1 className="display-5 fw-bold text-body-emphasis">We Wanted To Make A Differnce</h1>
         <div className="col-lg-6 mx-auto">
           <p className="lead mb-4">
-          At Pinzo, we make it easy to discover what's around you—based on your current location. No frills, just the info you need, right when you need it.
+          At Pinzo, we make it easy to discover what's around you, based on your current location. No frills, just the info you need, right when you need it.
           </p>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           </div>
