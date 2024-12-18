@@ -20,7 +20,7 @@ export default function HomeAbout() {
             Your Location, One Click Away.
             </h1>
             <p className="lead">
-            We make location tracking as simple as it gets. Click a button and instantly see your current location, no complications—just clarity, accuracy, and convenience when you need it most.
+            We make location tracking as simple as it gets. Click a button and instantly see your current location, no complications, just clarity, accuracy, and convenience when you need it most.
             </p>
             <div className="d-grid gap-2 d-md-flex justify-content-md-start">
               <a href="/locate">
