@@ -6,8 +6,8 @@ import dynamic from "next/dynamic";
 const LeafletMap = dynamic(() => import("./LeafletMap"), { ssr: false });
 
 export default function Locate() {
-  const [latitude, setLatitude] = useState(37.7749); // Default value for latitude (San Francisco)
-  const [longitude, setLongitude] = useState(-122.4194); // Default value for longitude (San Francisco)
+  const [latitude, setLatitude] = useState(0); // Default value for latitude (San Francisco)
+  const [longitude, setLongitude] = useState(0); // Default value for longitude (San Francisco)
   
   async function handleClick() {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -19,8 +19,8 @@ export default function Locate() {
   }
 
   function handleRemove(){
-    setLatitude(37.7749);
-    setLongitude(-122.4194);
+    setLatitude(0);
+    setLongitude(0);
   }
 
   return (
@@ -28,7 +28,7 @@ export default function Locate() {
       <div className="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
         <div className="col-lg-7 p-3 p-lg-5 pt-lg-3">
           <h1 className="display-4 fw-bold lh-1 text-body-emphasis">
-            Track Your Location in Real Time
+            Track Your Location In Real Time
           </h1>
           <p className="lead">
           Effortlessly track and display your current location with real-time GPS integration. Our intuitive, responsive design ensures a seamless experience, whether you're on desktop or mobile
