@@ -12,6 +12,7 @@ export default function HomeAbout() {
               width="700"
               height="500"
               loading="lazy"
+              style={{borderRadius:"25px"}}
             />
           </div>
           <div className="col-lg-6">
