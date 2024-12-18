@@ -51,9 +51,10 @@ export default function Locate() {
           <p className="lead">Latitude: {latitude ?? "Not Available"}</p>
           <p className="lead">Longitude: {longitude ?? "Not Available"}</p>
         </div>
+        <div  className="col-lg-4" style={{padding:"10px"}}>
         <div
-          className="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg"
-          style={{ borderRadius: "25px", backgroundColor: "#f0f0f0" }}
+          className=" offset-lg-1 p-0 overflow-hidden shadow-lg"
+          style={{ borderRadius: "25px", backgroundColor: "#f0f0f0",marginBottom:"30px"}}
         >
           {/* Render the map only if latitude and longitude are available */}
           {latitude && longitude ? (
@@ -71,6 +72,7 @@ export default function Locate() {
               <p style={{ color: "#888", fontSize: "18px" }}>Map Placeholder</p>
             </div>
           )}
+        </div>
         </div>
       </div>
     </div>
