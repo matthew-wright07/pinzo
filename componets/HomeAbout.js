@@ -6,7 +6,7 @@ export default function HomeAbout() {
         <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
           <div className="col-10 col-sm-8 col-lg-6">
             <Image
-              src="/theworld.jpg"
+              src="/theearth.png"
               className="d-block mx-lg-auto img-fluid"
               alt="Bootstrap Themes"
               width="700"
