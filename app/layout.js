@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Analytics } from "@vercel/analytics/react"
 
 // Export metadata directly in the layout file
 export const metadata = {
@@ -28,7 +29,10 @@ export default function RootLayout({ children }) {
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5455709376701219"
      crossorigin="anonymous"></script>
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+        </body>
     </html>
   );
 }
