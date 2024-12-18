@@ -1,15 +1,25 @@
 "use client";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 export default function LeafletMap({ latitude, longitude }) {
-  useEffect(() => {
-    // Initialize the map only after the component mounts (client-side)
-    let map;
+  const [isClient, setIsClient] = useState(false);
 
-    // Initialize map only if coordinates are available
-    if (latitude && longitude) {
+  // Set isClient to true when the component mounts, so LeafletMap is only initialized on the client
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient || !latitude || !longitude) return;
+
+    let map;
+    const mapContainer = document.getElementById("leaflet-map");
+
+    // Only initialize the map if it's not already initialized
+    if (!mapContainer._leaflet_id) {
       map = L.map("leaflet-map").setView([latitude, longitude], 13);
 
       // Add the OpenStreetMap tile layer
@@ -20,26 +30,44 @@ export default function LeafletMap({ latitude, longitude }) {
 
       // Custom pin icon
       const pinIcon = new L.Icon({
-        iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png", // pin icon URL
-        iconSize: [25, 41], // size of the icon
-        iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -41], // point from which the popup should open relative to the iconAnchor
+        iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [0, -41],
       });
 
-      // Add a marker at the user's location with custom pin icon
+      // Add a marker at the user's location
       L.marker([latitude, longitude], { icon: pinIcon })
         .addTo(map)
         .bindPopup(`You are here: ${latitude}, ${longitude}`)
         .openPopup();
     }
 
-    // Cleanup function to remove the map when the component unmounts or when coordinates change
+    // Cleanup function to remove the map instance when the component unmounts
     return () => {
       if (map) {
         map.remove();
       }
     };
-  }, [latitude, longitude]);
+  }, [isClient, latitude, longitude]);
 
-  return <div id="leaflet-map" style={{ width: "100%", height: "400px" }}></div>;
+  if (!isClient) {
+    return (
+      <div
+        id="leaflet-map"
+        style={{ width: "100%", height: "400px", borderRadius: "25px" }}
+      />
+    );
+  }
+
+  return (
+    <div
+      id="leaflet-map"
+      style={{
+        width: "100%",
+        height: "400px",
+        borderRadius: "25px",
+      }}
+    />
+  );
 }

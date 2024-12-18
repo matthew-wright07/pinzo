@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
@@ -6,21 +7,19 @@ import dynamic from "next/dynamic";
 const LeafletMap = dynamic(() => import("./LeafletMap"), { ssr: false });
 
 export default function Locate() {
-  const [latitude, setLatitude] = useState(0); // Default value for latitude (San Francisco)
-  const [longitude, setLongitude] = useState(0); // Default value for longitude (San Francisco)
-  
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
   async function handleClick() {
     navigator.geolocation.getCurrentPosition((position) => {
-      const newLatitude = position.coords.latitude;
-      const newLongitude = position.coords.longitude;
-      setLatitude(newLatitude);
-      setLongitude(newLongitude);
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
     });
   }
 
-  function handleRemove(){
-    setLatitude(0);
-    setLongitude(0);
+  function handleRemove() {
+    setLatitude(null);
+    setLongitude(null);
   }
 
   return (
@@ -31,22 +30,47 @@ export default function Locate() {
             Track Your Location In Real Time
           </h1>
           <p className="lead">
-          Effortlessly track and display your current location with real-time GPS integration. Our intuitive, responsive design ensures a seamless experience, whether you're on desktop or mobile
+            Effortlessly track and display your current location with real-time GPS integration. Our intuitive, responsive design ensures a seamless experience, whether you're on desktop or mobile.
           </p>
           <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-            <button onClick={handleClick} type="button" className="btn btn-primary btn-lg px-4 me-md-2 fw-bold">
+            <button
+              onClick={handleClick}
+              type="button"
+              className="btn btn-primary btn-lg px-4 me-md-2 fw-bold"
+            >
               Get Current Location
             </button>
-            <button onClick={handleRemove} type="button" className="btn btn-outline-secondary btn-lg px-4">
+            <button
+              onClick={handleRemove}
+              type="button"
+              className="btn btn-outline-secondary btn-lg px-4"
+            >
               Reset
             </button>
           </div>
-          <p className="lead">Latitude: {latitude}</p>
-          <p className="lead">Longitude: {longitude}</p>
+          <p className="lead">Latitude: {latitude ?? "Not Available"}</p>
+          <p className="lead">Longitude: {longitude ?? "Not Available"}</p>
         </div>
-        <div className="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-          {/* Map always shows up, initialized with default values */}
-          <LeafletMap latitude={latitude} longitude={longitude} />
+        <div
+          className="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg"
+          style={{ borderRadius: "25px", backgroundColor: "#f0f0f0" }}
+        >
+          {/* Render the map only if latitude and longitude are available */}
+          {latitude && longitude ? (
+            <LeafletMap latitude={latitude} longitude={longitude} />
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                height: "400px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p style={{ color: "#888", fontSize: "18px" }}>Map Placeholder</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
