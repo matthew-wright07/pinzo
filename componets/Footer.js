@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <div className="bg-dark">
-      <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top px-4" >
+      <footer className="d-flex flex-wrap justify-content-between align-items-center py-4 mt-4 border-top px-4" >
         <p className="col-md-4 mb-0 text-white">Pinzo {new Date().getFullYear()}</p>
 
 
